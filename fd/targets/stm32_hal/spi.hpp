@@ -13,7 +13,7 @@
 #include <fd/targets/base/gpio.hpp>
 #include <stm32f1xx_hal.h>
 
-#include <fd/fondant_targets.hpp>
+#include "fd/util/fondant_targets.hpp"
 
 namespace fd::stm32_hal {
 

@@ -9,7 +9,7 @@
 #ifndef FD_HDR_FONDANT
 #define FD_HDR_FONDANT
 
-#include <fd/fondant_targets.hpp>
+#include "fd/util/fondant_targets.hpp"
 
 #include <fd/targets/base/core.hpp>
 

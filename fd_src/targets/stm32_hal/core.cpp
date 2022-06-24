@@ -6,7 +6,7 @@
  * https://www.boost.org/LICENSE_1_0.txt)
  *
 */
-#include <fd/fondant_targets.hpp>
+#include "fd/util/fondant_targets.hpp"
 
 
 #if FONDANT_TARGET==FONDANT_TARGET_STM32_HAL
