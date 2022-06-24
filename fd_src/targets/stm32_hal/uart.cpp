@@ -1,7 +1,7 @@
 #include <fd/fondant_targets.hpp>
 
 #if FONDANT_TARGET == FONDANT_TARGET_STM32_HAL
-#ifdef FONDANT_HW_SPI
+#ifdef FONDANT_HW_UART
 
 #include <fd/targets/stm32_hal/uart.hpp>
 

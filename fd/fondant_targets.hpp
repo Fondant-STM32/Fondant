@@ -26,6 +26,10 @@
 #define FONDANT_HW_I2C
 #endif
 
+#ifdef HAL_UART_MODULE_ENABLED
+#define FONDANT_HW_UART
+#endif
+
 
 #endif
 

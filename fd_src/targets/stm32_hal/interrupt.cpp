@@ -16,6 +16,7 @@ using namespace fd::stm32_hal;
  * Callback Implementaties voor UART interrupts
  */
 
+#ifdef FONDANT_HW_UART
 extern "C" void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart) {
     fd::stm32_hal::interrupt_handler.call(interrupts::UART_TxComplete, interrupt_data{huart});
 }
@@ -51,6 +52,8 @@ extern "C" void HAL_UART_AbortReceiveCpltCallback(UART_HandleTypeDef *huart){
 extern "C" void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size){
     fd::stm32_hal::interrupt_handler.call(interrupts::UART_RxEvent, interrupt_data{huart, Size});
 }
+#endif
+
 
 /*
  * Callback Implementaties voor EXTI interrupts
@@ -63,6 +66,7 @@ extern "C" void HAL_GPIO_EXTI_Callback(uint16_t gpioPin) {
 /*
  * Callback Implementaties voor SPI interrupts
  */
+#ifdef FONDANT_HW_SPI
 extern "C" void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi){
     fd::stm32_hal::interrupt_handler.call(fd::stm32_hal::interrupts::SPI_TxComplete, interrupt_data{hspi});
 }
@@ -87,10 +91,12 @@ extern "C" void HAL_SPI_ErrorCallback(SPI_HandleTypeDef *hspi){
 extern "C" void HAL_SPI_AbortCpltCallback(SPI_HandleTypeDef *hspi){
     fd::stm32_hal::interrupt_handler.call(fd::stm32_hal::interrupts::SPI_AbortComplete, interrupt_data{hspi});
 }
+#endif
 
 /*
  * Callback implementaties voor I2C interrupts
  */
+#ifdef FONDANT_HW_I2C
 extern "C" void HAL_I2C_MasterTxCpltCallback(I2C_HandleTypeDef *hi2c){
     fd::stm32_hal::interrupt_handler.call(fd::stm32_hal::interrupts::I2C_MasterTxComplete, interrupt_data{hi2c});
 }
@@ -121,6 +127,7 @@ extern "C" void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *hi2c){
 extern "C" void HAL_I2C_AbortCpltCallback(I2C_HandleTypeDef *hi2c){
     fd::stm32_hal::interrupt_handler.call(fd::stm32_hal::interrupts::I2C_AbortComplete, interrupt_data{hi2c});
 }
+#endif
 
 
 #endif

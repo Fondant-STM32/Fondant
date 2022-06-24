@@ -12,7 +12,8 @@
 
 #include <utility>
 #include <variant>
-#include "fd/functional.hpp"
+#include <fd/functional.hpp>
+#include <fd/fondant_targets.hpp>
 
 namespace fd::stm32_hal {
     /**
@@ -31,6 +32,7 @@ namespace fd::stm32_hal {
         /// Interrupt_data.data0 bevat het bitmask van het pinnummer (In HAL opgenomen met macro's: GPIO_PIN_N)
         ExternalInterrupt = 0x0101,
 
+#ifdef FONDANT_HW_UART
         /// Aangeroepen wanneer een UART transmissie volledig afgerond is
         /// Interrupt_data.peripheralHandle bevat een pointer naar de UART_HandleTypeDef
         UART_TxComplete            = 0x0201,
@@ -59,8 +61,9 @@ namespace fd::stm32_hal {
         /// Interrupt_data.peripheralHandle bevat een pointer naar de UART_HandleTypeDef
         /// Data0 bevat de size van al gelezen bytes
         UART_RxEvent               = 0x0209,
+#endif
 
-
+#ifdef FONDANT_HW_SPI
         /// Aangeroepen wanneer een SPI transmissie volledig afgerond is
         /// Interrupt_data.peripheralHandle bevat een pointer naar de SPI_HandleTypeDef
         SPI_TxComplete       = 0x0301,
@@ -85,7 +88,9 @@ namespace fd::stm32_hal {
         /// Aangeroepen wanneer HAL_SPI_Abort volledig is afgerond
         /// Interrupt_data.peripheralHandle bevat een pointer naar de SPI_HandleTypeDef
         SPI_AbortComplete    = 0x0308,
+#endif
 
+#ifdef FONDANT_HW_I2C
         /// Aangeroepen wanneer er een I2C-master-schrijftransactie helemaal is afgerond
         /// Interrupt_data.peripheralHandle bevat een pointer naar de I2C_HandleTypeDef
         I2C_MasterTxComplete = 0x0401,
@@ -118,6 +123,7 @@ namespace fd::stm32_hal {
         /// Aangeroepen wanneer HAL_I2C_Master_Abort_IT volledig is uitgevoerd
         /// Interrupt_data.peripheralHandle bevat een pointer naar de I2C_HandleTypeDef
         I2C_AbortComplete    = 0x0410
+#endif
     };
 
     using interrupt_function_type = function_ref<void(interrupt_data)>;
